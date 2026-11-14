@@ -15,6 +15,7 @@ if (!process.env.ADMIN_PIN) console.warn('[warn] ADMIN_PIN not set, using 1234')
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+app.set('trust proxy', true); // Render terminates TLS; makes req.protocol https for the QR URL
 app.use(express.json({ limit: '20kb' }));
 
 // ponytail: display state lives in memory; resets to defaults on restart.
